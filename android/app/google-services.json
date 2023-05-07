@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "932245990521",
+    "project_id": "burdayim-9622a",
+    "storage_bucket": "burdayim-9622a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:932245990521:android:24e981791b08941e8b38a8",
+        "android_client_info": {
+          "package_name": "com.example.burdayim"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "932245990521-4a9bmn2i1o4rfspvniiaj9b9mpmdktrm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARgvGQx6K6CDfq6dOmOpIRU4ZYOufeueM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "932245990521-4a9bmn2i1o4rfspvniiaj9b9mpmdktrm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
