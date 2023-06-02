@@ -1,4 +1,4 @@
 # burdayim
 
-![LoginScreen](https://imgur.com/Psxii8y)
+![LoginScreen](https://i.imgur.com/Psxii8y.png)
 
