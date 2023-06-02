@@ -8,7 +8,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  runApp(MaterialApp(home:Giris()));
+  runApp(MaterialApp(home:MyApp()));
 }
 
 class MyApp extends StatefulWidget {
@@ -35,14 +35,14 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
 
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
       ),
       home: Scaffold(
         body: IndexedStack(
           index: _currentIndex,
           children: _children,
         ),
-        bottomNavigationBar: BottomNavigationBar(
+        bottomNavigationBar: BottomNavigationBar(backgroundColor: Colors.white70,
           currentIndex: _currentIndex,
           onTap: onTabTapped,
           items: [

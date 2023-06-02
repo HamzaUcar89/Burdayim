@@ -1,7 +1,9 @@
 import 'package:burdayim/giris.dart';
+import 'package:burdayim/main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'authhentication.dart';
 
 class Kayit extends StatefulWidget {
@@ -17,42 +19,51 @@ class _KayitState extends State<Kayit> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(backgroundColor: Colors.blueGrey,
-        body: ListView(
-          padding: EdgeInsets.all(16.0),
-          children: <Widget>[
-            SizedBox(height: 40),
-            // logo
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/images/layer2.jpg"),
+              fit: BoxFit.cover,
+            )
+        ),
+          child: ListView(
+            padding: EdgeInsets.all(16.0),
+            children: <Widget>[
+              SizedBox(height: 40),
+              // logo
 
-            SizedBox(height: 30),
+              SizedBox(height: 30),
 
 
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SignupForm(),
-            ),
-            SizedBox(height: 15),
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[SizedBox(width: 30,),
-                      Text('Zaten Hesabın Var Mı ?',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20,color: Colors.white)),SizedBox(width: 10,),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: Text(' Giriş Yap',
-                            style: TextStyle(fontSize: 20, color: Colors.white)),
-                      )
-                    ],
-                  )
-                ],
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SignupForm(),
               ),
-            ),
-          ],
+              SizedBox(height: 15),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[SizedBox(width: 30,),
+                        Text('Zaten Hesabın Var Mı ?',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 20,color: Colors.green)),SizedBox(width: 10,),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushReplacement(context,
+                                MaterialPageRoute(builder: (context) => Giris()));
+                          },
+                          child: Text(' Giriş Yap',
+                              style: TextStyle(fontSize: 20, color: Colors.green)),
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -64,11 +75,11 @@ class _KayitState extends State<Kayit> {
       width: 80,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(10)),
-          color: Colors.white),
+          color: Colors.green),
       child: Center(
         child: Text(
           "T",
-          style: TextStyle(color: Colors.white, fontSize: 60.0),
+          style: TextStyle(color: Colors.green, fontSize: 60.0),
         ),
       ),
     );
@@ -91,6 +102,8 @@ class _SignupFormState extends State<SignupForm> {
   String? password;
   String? name;
   String? tc;
+  String? gsm;
+
   bool _obscureText = false;
 
   bool agree = false;
@@ -116,8 +129,8 @@ class _SignupFormState extends State<SignupForm> {
             decoration: InputDecoration(
 
                 labelText: 'E-posta',
-                labelStyle: TextStyle(color: Colors.white),
-                prefixIcon: Icon(Icons.email_outlined,color: Colors.white,),
+                labelStyle: TextStyle(color: Colors.green),
+                prefixIcon: Icon(Icons.email_outlined,color: Colors.green,),
                 border: border),
             validator: (value) {
               if (value!.isEmpty) {
@@ -133,14 +146,37 @@ class _SignupFormState extends State<SignupForm> {
 
           space,
 
+          TextFormField(
+            keyboardType: TextInputType.phone,
+            decoration: InputDecoration(
+
+                labelText: 'Telefon Numaranız',
+                labelStyle: TextStyle(color: Colors.green),
+                prefixIcon: Icon(Icons.phone,color: Colors.green,),
+              border: border,
+            ),
+            onSaved: (val) {
+              UserInput.gsm = val.toString();
+              gsm = val;
+            },
+            validator: (value) {
+              if (value!.isEmpty) {
+                return 'Telefon Numaranızı Giriniz';
+              }
+              return null;
+            },
+          ),SizedBox(height: 10),
+
+          space,
+
           // password
           TextFormField(
             controller: pass,
             decoration: InputDecoration(
               labelText: 'Şifre',
 
-              labelStyle: TextStyle(color: Colors.white),
-              prefixIcon: Icon(Icons.lock_outlined,color: Colors.white,),
+              labelStyle: TextStyle(color: Colors.green),
+              prefixIcon: Icon(Icons.lock_outlined,color: Colors.green,),
               border: border,
               suffixIcon: GestureDetector(
                 onTap: () {
@@ -170,8 +206,8 @@ class _SignupFormState extends State<SignupForm> {
           TextFormField(
             decoration: InputDecoration(
               labelText: 'Şifre(Tekrar)',
-              labelStyle: TextStyle(color: Colors.white),
-              prefixIcon: Icon(Icons.lock_outlined,color: Colors.white,),
+              labelStyle: TextStyle(color: Colors.green),
+              prefixIcon: Icon(Icons.lock_outlined,color: Colors.green,),
               border: border,
             ),
             obscureText: true,
@@ -186,9 +222,15 @@ class _SignupFormState extends State<SignupForm> {
           space,
           // name
           TextFormField(
+            keyboardType: TextInputType.phone,
+            inputFormatters: [
+              FilteringTextInputFormatter.digitsOnly,
+              LengthLimitingTextInputFormatter(11),
+            ],
             decoration: InputDecoration(
-              labelStyle: TextStyle(color: Colors.white),
-              prefixIcon: Icon(Icons.account_circle,color: Colors.white),
+
+              labelStyle: TextStyle(color: Colors.green),
+              prefixIcon: Icon(Icons.account_circle,color: Colors.green),
               labelText: 'TC kimlik numaranız',
 
               border: border,
@@ -198,16 +240,16 @@ class _SignupFormState extends State<SignupForm> {
               tc = val;
               },
             validator: (value) {
-              if (value!.isEmpty) {
-                return 'TC kimlik Bilgilerinizi Giriniz';
+              if (value!.isEmpty||value.isEmpty || value.length != 11) {
+                return 'TC kimlik Numaranızı Hatasız Giriniz';
               }
               return null;
             },
           ),SizedBox(height: 10,),
           TextFormField(
             decoration: InputDecoration(
-              labelStyle: TextStyle(color: Colors.white),
-              prefixIcon: Icon(Icons.account_circle,color: Colors.white),
+              labelStyle: TextStyle(color: Colors.green),
+              prefixIcon: Icon(Icons.account_circle,color: Colors.green),
               labelText: 'Adınız Soyadınız',
 
               border: border,
@@ -235,7 +277,7 @@ class _SignupFormState extends State<SignupForm> {
               ),
               Flexible(
                 child: Text(
-                    'Hesap oluşturarak, Şartlar ve Koşullar ile Gizlilik Politikasını kabul ediyorum.',style: TextStyle(color: Colors.white)),
+                    'Hesap oluşturarak, Şartlar ve Koşullar ile Gizlilik Politikasını kabul ediyorum.',style: TextStyle(color: Colors.black45)),
               ),
             ],
           ),
@@ -258,7 +300,7 @@ class _SignupFormState extends State<SignupForm> {
                       .then((result) {
                     if (result == null) {
                       Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => Giris()));
+                          MaterialPageRoute(builder: (context) => MyApp()));
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                         content: Text(
@@ -270,10 +312,10 @@ class _SignupFormState extends State<SignupForm> {
                   });
                 }
               },
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.white,
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.green,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(24.0)))),
-              child: Text('Kayıt Ol',style: TextStyle(color: Colors.black,fontSize:22),),
+              child: Text('Kayıt Ol',style: TextStyle(color: Colors.white,fontSize:22),),
             ),
           ),
         ],
@@ -282,6 +324,7 @@ class _SignupFormState extends State<SignupForm> {
   }
 }
 class UserInput {
-  static String tc = 'anonymus';
-  static String name = "anonymus";
+  static String tc = 'Bilinmiyor';
+  static String name = "Bilinmiyor";
+  static String gsm ="+Bilinmiyor";
 }
