@@ -1,4 +1,4 @@
 # burdayim
 
-![Resim Açıklaması](https://imgur.com/Psxii8y)
+![LoginScreen](https://imgur.com/Psxii8y)
 
