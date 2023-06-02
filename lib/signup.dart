@@ -1,4 +1,4 @@
-import 'package:burdayim/giris.dart';
+import 'package:burdayim/login.dart';
 import 'package:burdayim/main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';

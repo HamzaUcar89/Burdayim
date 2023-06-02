@@ -1,7 +1,7 @@
-import 'package:burdayim/kayit.dart';
+import 'package:burdayim/signup.dart';
 import 'package:burdayim/main.dart';
 import 'package:flutter/material.dart';
-import 'anasayfa.dart';
+import 'homepage.dart';
 import 'authhentication.dart';
 
 class Giris extends StatelessWidget {

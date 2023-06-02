@@ -1,5 +1,5 @@
-import 'package:burdayim/giris.dart';
-import 'package:burdayim/kayit.dart';
+import 'package:burdayim/login.dart';
+import 'package:burdayim/signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';

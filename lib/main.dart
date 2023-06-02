@@ -1,8 +1,8 @@
-import 'package:burdayim/giris.dart';
-import 'package:burdayim/kayit.dart';
+import 'package:burdayim/login.dart';
+import 'package:burdayim/signup.dart';
 import 'package:flutter/material.dart';
-import 'anasayfa.dart';
-import 'second_page.dart';
+import 'homepage.dart';
+import 'profilepage.dart';
 import 'package:firebase_core/firebase_core.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
